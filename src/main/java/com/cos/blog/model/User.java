@@ -32,7 +32,7 @@ public class User {
 	private int id;	// 시퀀스, auto increment
 	
 	@Column(nullable = false, length = 30, unique = true) // null이 될수없고 최대길이가 30자
-	private String userName; // id
+	private String username; // id
 	
 	@Column(nullable = false, length = 100) // 123456 => 해쉬 (비밀번호 암호화)
 	private String password;

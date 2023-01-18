@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+			 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+			 layout:decorate="~{layout/default_layout}">
+
+<div layout:fragment="content">
+	<div class="container">
+		<button class="btn btn-secondary" onclick="history.back();">돌아가기</button>
+		<th:block  th:if="${board.user.id == #authentication.principal.user.id}">
+			<!-- principal 아래의 두가지 방법이 있다 -->
+			<!-- <span th:text="${#authentication.principal.user.id}"></span>
+			<span sec:authentication="principal.user.id">test</span> -->
+			<a th:href="@{/board/{id}/updateForm(id = ${board.id})}" class="btn btn-warning">수정</a>
+			<button id="btn-delete" class="btn btn-danger">삭제</button>
+		</th:block>
+		<br/><br/>
+		<div>
+			글 번호 : <span id="id"><i th:text="${board.id}"> </i></span>
+			작성자 : <span><i th:text="${board.user.username}"> </i></span>
+		</div>
+		<br/>
+		<div>
+			<h3 th:text="${board.title}"></h3>
+		</div>
+		<hr />
+		<div>
+			<div th:utext="${board.content}"></div>
+		</div>
+		<hr />
+	</div>
+	<script th:src="@{/js/board.js}"></script>
+</div>
+</html>

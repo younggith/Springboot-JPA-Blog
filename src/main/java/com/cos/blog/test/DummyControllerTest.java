@@ -73,7 +73,7 @@ public class DummyControllerTest {
 	
 	// 한페이지당 2건의 데이터를 리턴받아 볼 예정
 	@GetMapping("/dummy/user")
-	public List<User> pageList(@PageableDefault(size = 2, sort = "id", 
+	public Page<User> pageList(@PageableDefault(size = 2, sort = "id", 
 	direction = Sort.Direction.DESC) Pageable pageable) {
 		Page<User> pagingUser = userRepository.findAll(pageable);
 		
@@ -81,7 +81,7 @@ public class DummyControllerTest {
 			
 		}
 		List<User> users = pagingUser.getContent();
-		return users;
+		return pagingUser;
 	}
 	
 	// {id} 주소로 파라미터를 전달 받을 수 있음
@@ -114,10 +114,10 @@ public class DummyControllerTest {
 	}
 	
 	// http://localhost:9090/blog/dummy/join (요청)
-	// http의 body에 userName, password, email 데이터를 가지고 (요청)
+	// http의 body에 Username, password, email 데이터를 가지고 (요청)
 	@PostMapping("/dummy/join")
 	public String join(User user) {	// key=value (약속된 규칙)
-		System.out.println("userName : "+user.getUserName());
+		System.out.println("Username : "+user.getUsername());
 		System.out.println("password : "+user.getPassword());
 		System.out.println("email : "+user.getEmail());
 		
